@@ -10,10 +10,9 @@
 
   a {
     display: block;
+    padding: 2rem 0;
 
     & + a {
-      margin-top: 2rem;
-      padding-top: 2rem;
       border-top: 1px solid #323238;
     }
 
