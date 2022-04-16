@@ -42,3 +42,20 @@
     margin-top: 2.25rem;
   }
 }
+
+@media (max-width: 760px) {
+  .contentContainer {
+    flex-direction: column;
+  }
+
+  .hero {
+    max-width: 100%;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}

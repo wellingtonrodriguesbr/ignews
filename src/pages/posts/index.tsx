@@ -30,6 +30,7 @@ export default function Posts({ posts }: PostsProps) {
         <div className={styles.posts}>
           {posts.map((post) => (
             <Link
+              key={post.slug}
               href={
                 !session ? `/posts/preview/${post.slug}` : `/posts/${post.slug}`
               }
