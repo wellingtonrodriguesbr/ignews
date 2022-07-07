@@ -35,7 +35,7 @@ export default function Posts({ posts }: PostsProps) {
                 !session ? `/posts/preview/${post.slug}` : `/posts/${post.slug}`
               }
             >
-              <a key={post.slug}>
+              <a>
                 <time>{post.updateAt}</time>
                 <strong>{post.title}</strong>
                 <p>{post.excerpt}</p>
@@ -63,8 +63,7 @@ export const getStaticProps: GetStaticProps = async () => {
       slug: post.uid,
       title: RichText.asText(post.data.title),
       excerpt:
-        post.data.content.find((content) => content.type === "paragraph")
-          ?.text ?? "",
+        post.data.content.find(({ type }) => type === "paragraph")?.text ?? "",
       updateAt: new Date(post.last_publication_date).toLocaleDateString(
         "pt-BR",
         {
