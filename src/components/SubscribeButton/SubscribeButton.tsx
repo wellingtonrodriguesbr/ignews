@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 export function SubscribeButton() {
   const { data: session } = useSession();
   const router = useRouter();
+
   async function handleSubscribe() {
     if (!session) {
       signIn("github");
