@@ -24,7 +24,7 @@ describe("Post preview page", () => {
     render(<Post post={post} />);
     expect(screen.getByText("My Post")).toBeInTheDocument();
     expect(screen.getByText("post excerpt")).toBeInTheDocument();
-    expect(screen.getByText("Wanna continua reading?")).toBeInTheDocument();
+    expect(screen.getByText("Wanna continue reading?")).toBeInTheDocument();
   });
 
   it("redirects user to full post when user is subscribed", async () => {
@@ -32,9 +32,13 @@ describe("Post preview page", () => {
     const useRouterMocked = jest.mocked(useRouter);
     const pushMocked = jest.fn();
 
-    useSessionMocked.mockReturnValueOnce([
-      { activeSubscription: "fake-active-subscription" },
-    ] as any);
+    useSessionMocked.mockReturnValueOnce({
+      data: {
+        expires: "fake-expires",
+        activeSubscription: "fake-active-subscription",
+      },
+      status: "authenticated",
+    });
 
     useRouterMocked.mockReturnValueOnce({
       push: pushMocked,
