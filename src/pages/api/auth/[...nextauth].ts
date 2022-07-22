@@ -8,11 +8,7 @@ export default NextAuth({
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      authorization: {
-        params: {
-          scope: "read:user",
-        },
-      },
+      authorization: "https://github.com/login/oauth/authorize?scope=read:user",
     }),
   ],
   callbacks: {
@@ -37,43 +33,33 @@ export default NextAuth({
             ])
           )
         );
-        return {
-          ...session,
+        Object.assign(session, {
           activeSubscription: userActiveSubscription,
-        };
+        });
       } catch {
-        return {
-          ...session,
-          activeSubscription: null,
-        };
+        Object.assign(session, { activeSubscription: null });
       }
+      return session;
     },
-    async signIn({ user, account, profile }) {
-      const { email } = user;
+    async signIn({ user }) {
       try {
+        const matchExpression = query.Match(
+          query.Index("user_by_email"),
+          query.Casefold(user.email!)
+        );
+
         await fauna.query(
           query.If(
-            query.Not(
-              query.Exists(
-                query.Match(
-                  query.Index("user_by_email"),
-                  query.Casefold(user.email)
-                )
-              )
-            ),
+            query.Not(query.Exists(matchExpression)),
             query.Create(query.Collection("users"), {
               data: {
-                email,
+                email: user.email!,
               },
             }),
-            query.Get(
-              query.Match(
-                query.Index("user_by_email"),
-                query.Casefold(user.email)
-              )
-            )
+            query.Get(matchExpression)
           )
         );
+
         return true;
       } catch {
         return false;
