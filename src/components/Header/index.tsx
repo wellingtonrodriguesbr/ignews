@@ -1,7 +1,7 @@
 import { SignInButton } from "../SignInButton/SignInButton";
 import { ActiveLink } from "../ActiveLink";
 import styles from "./styles.module.scss";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
 import useMedia from "use-media";
 
@@ -25,7 +25,7 @@ export function Header() {
 
         <nav className={styles.navMobile}>
           <button onClick={() => setMenuMobileIsActive(!menuMobileIsActive)}>
-            <FiMenu />
+            {menuMobileIsActive ? <FiX /> : <FiMenu />}
           </button>
         </nav>
       </div>
