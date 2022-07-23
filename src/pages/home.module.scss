@@ -26,6 +26,11 @@
     span {
       color: var(--cyan-500);
     }
+
+    @media (max-width: 760px) {
+      font-size: 3.5rem;
+      line-height: 3.5rem;
+    }
   }
 
   p {
@@ -48,6 +53,11 @@
 @media (max-width: 760px) {
   .contentContainer {
     flex-direction: column;
+    justify-content: center;
+
+    img {
+      display: none;
+    }
   }
 
   .hero {

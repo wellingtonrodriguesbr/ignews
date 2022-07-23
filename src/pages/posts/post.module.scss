@@ -11,6 +11,10 @@
   h1 {
     font-size: 3.5rem;
     font-weight: 900;
+
+    @media (max-width: 760px) {
+      font-size: 2rem;
+    }
   }
 
   time {

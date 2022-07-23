@@ -4,6 +4,7 @@ import { SubscribeButton } from "../components/SubscribeButton/SubscribeButton";
 import { stripe } from "../services/stripe";
 
 import styles from "./home.module.scss";
+import { SignInButton } from "../components/SignInButton/SignInButton";
 
 interface HomeProps {
   product: {
