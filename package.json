@@ -21,7 +21,8 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "sass": "^1.43.5",
-    "stripe": "^8.194.0"
+    "stripe": "^8.194.0",
+    "use-media": "^1.4.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.13.0",
